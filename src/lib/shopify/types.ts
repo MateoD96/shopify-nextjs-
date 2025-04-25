@@ -58,6 +58,7 @@ export type SEO = {
   title: string;
   description: string;
 };
+
 export type ShopifyProduct = {
   id: string;
   handle: string;
@@ -92,4 +93,24 @@ export type ShopifyProductsOperation = {
     reverse?: boolean;
     sortKey?: string;
   };
+};
+
+///////////////////////////////
+
+export type ShopifyCollectionsOperation = {
+  data: {
+    collections: Connection<ShopifyCollection>;
+  };
+};
+
+export type ShopifyCollection = {
+  handle: string;
+  title: string;
+  description: string;
+  seo: SEO;
+  updatedAt: string;
+};
+
+export type Collection = ShopifyCollection & {
+  path: string;
 };
