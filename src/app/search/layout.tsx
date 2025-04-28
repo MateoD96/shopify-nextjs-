@@ -1,4 +1,6 @@
+import FilterList from "@/components/layout/filter";
 import Collections from "@/components/layout/search/collections";
+import { sorting } from "@/lib/constants";
 
 export default function SearchLayout({
   children,
@@ -14,7 +16,7 @@ export default function SearchLayout({
         {children}
       </div>
       <div className=" order-none flex-none md:order-last md:w-[125px]">
-        {/*  <FilterList /> */}
+        <FilterList list={sorting} title="Filters" />
       </div>
     </div>
   );
