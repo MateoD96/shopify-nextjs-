@@ -4,7 +4,10 @@ import {
   TAGS,
 } from "../constants";
 import { isShopifyError } from "../type-guards";
-import { getCollectionQuery } from "./queries/collection";
+import {
+  getCollectionProductsQuery,
+  getCollectionQuery,
+} from "./queries/collection";
 import { getMenuQuery } from "./queries/menu";
 import { getProductsQuery } from "./queries/product";
 import {
@@ -14,6 +17,7 @@ import {
   Menu,
   Product,
   ShopifyCollection,
+  ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
   ShopifyMenuOperation,
   ShopifyProduct,
@@ -233,4 +237,33 @@ export async function getCollections(): Promise<Collection[]> {
   ];
 
   return collections;
+}
+
+export async function getCollectionProducts({
+  collection,
+  sortKey,
+  reverse,
+}: {
+  collection: string;
+  sortKey?: string;
+  reverse?: boolean;
+}): Promise<Product[]> {
+  const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
+    query: getCollectionProductsQuery,
+    tags: [TAGS.collections, TAGS.products],
+    variables: {
+      handle: collection,
+      reverse,
+      sortKey: sortKey === "CREATED_AT" ? "CREATED" : sortKey,
+    },
+  });
+
+  if (!res.body.data.collection) {
+    console.log(`No collection found for \`${collection}\``);
+    return [];
+  }
+
+  return reshapeProducts(
+    removeEdgesAndNodes(res.body.data.collection.products)
+  );
 }

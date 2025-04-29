@@ -1,23 +1,25 @@
+export const SITE_NAME = "Shopify Store";
+export const SHOPIFY_GRAPHQL_API_ENDPOINT = "api/2025-04/graphql.json";
+
+export const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
+
 export const TAGS = {
   collections: "collections",
   products: "products",
   cart: "cart",
 } as const;
 
-export const SITE_NAME = "Shopify Store";
-export const SHOPIFY_GRAPHQL_API_ENDPOINT = "api/2025-04/graphql.json";
-
 export type SortFilterItem = {
   title: string;
   slug: string | null;
-  sortKey: "RELEVANT" | "BEST_SELLING" | "CREATED_AT" | "PRICE";
+  sortKey: "RELEVANCE" | "BEST_SELLING" | "CREATED_AT" | "PRICE";
   reverse: boolean;
 };
 
 export const defaultSort: SortFilterItem = {
   title: "Relevance",
   slug: null,
-  sortKey: "RELEVANT",
+  sortKey: "RELEVANCE",
   reverse: false,
 };
 
@@ -48,5 +50,3 @@ export const sorting: SortFilterItem[] = [
     reverse: false,
   },
 ];
-
-export const HIDDEN_PRODUCT_TAG = "nextjs-frontend-hidden";
