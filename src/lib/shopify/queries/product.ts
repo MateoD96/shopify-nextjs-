@@ -27,8 +27,8 @@ export const getProductsQuery = /* GraphQL */ `
 `;
 
 export const getProductRecommendationsQuery = /* GraphQL */ `
-  query getProductRecommendations($id: ID!) {
-    productRecommendations(productId: $id) {
+  query getProductRecommendations($productId: ID!) {
+    productRecommendations(productId: $productId) {
       ...product
     }
   }

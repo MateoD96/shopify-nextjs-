@@ -162,9 +162,9 @@ export type CartItem = {
     selectedOptions: {
       name: string;
       value: string;
-    };
-  }[];
-  product: CartProduct;
+    }[];
+    product: CartProduct;
+  };
 };
 
 export type ShopifyCart = {
@@ -177,6 +177,15 @@ export type ShopifyCart = {
   };
   lines: Connection<CartItem>;
   totalQuantity: number;
+};
+
+export type ShopifyCartOperation = {
+  data: {
+    cart: ShopifyCart;
+  };
+  variables: {
+    cartId: string;
+  };
 };
 
 export type Cart = Omit<ShopifyCart, "lines"> & {
